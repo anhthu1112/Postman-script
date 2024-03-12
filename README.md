@@ -53,6 +53,14 @@ Ví dụ: Trong file excel đính kèm
 ## II. Bài tập: API tạo mới KH: POST /admin/customer.json
 ### Viết testcase kiểm tra status code = 400 khi không truyền họ, tên và email bằng Postmanscript
 
+- Kiểm tra status code 422 
+
+```js
+pm.test("response status code 422", function(){
+  pm.expect(pm.response.code).to.eq(422);
+});
+```
+
 - Truyền request bỏ trống email 
 
 ```js
