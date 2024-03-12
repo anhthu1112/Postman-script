@@ -1,9 +1,9 @@
-# Postman script
+# 07/03 : Postman script
 
 ## I. Lý thuyết
 ### Nêu một số phương pháp thiết kế testcase, cho ví dụ
 
-- Kỹ thuật phân vùng tương đương
+#### Kỹ thuật phân vùng tương đương
 
 Kỹ thuật phân chia các giá trị đầu vào thành các phân vùng hợp lệ và không hợp lệ, sau đó chũng ta sẽ viết kịch bản kiểm thử cho từng phần, chọn giá trị địa diện từ mỗi phân vùng làm dữ liệu thử nghiệm 
 
@@ -17,7 +17,7 @@ VD: Nhập giá tiền là một sô nguyên dương 5 ký tự
   * Các lớp tương đương hợp lệ: Số nguyên dương, 5 ký tự 
   * Các lớp không hợp lệ: ký tự chữ, ký tự đặc biệt, số âm, nhỏ hơn 5 ký tự, lớn hơn 5 ký tự 
 
-- Phân tích giá trị biên 
+#### Phân tích giá trị biên 
 
 Là kỹ thuật kiểm thử phần mềm có liên quan dến việc xác định biên(ranh giới) của điều kiện mô  tả cho các giá trị đầu vào và chọn giá trị ở biên và bên cạnh giá trị biên làm dữ liệu kiểm thử
 
@@ -36,7 +36,7 @@ VD: phân tích giá trị biên cho điểm nằm trong khoảng [0,100]
   * Giá trị lớn hơn giá trị lớn nhất: 101 
   * Giá trị trung bình: 50 
 
-- Bảng quyết định 
+#### Bảng quyết định 
 
 Dùng bản để hiển thị danh sách các thao tác phần mềm được quyết định trên các điều kiện khác nhau. Chú trọng vào nhiều điều kiện để thực hiện test. Đây là phương pháp tốt nhấ để áp dụng cho trường hợp cần nhiều sự kết hợp 
 
@@ -48,18 +48,18 @@ Bảng quyết định hỗ trợ lựa chọn test case một các co hệ th�
     * Đặt tất cả kết hợp trong bảng 
     * Giảm thiểu các case kết hợp và quyết định các testcase 
 
-
+Ví dụ: Trong file excel đính kèm 
 
 ## II. Bài tập: API tạo mới KH: POST /admin/customer.json
 ### Viết testcase kiểm tra status code = 400 khi không truyền họ, tên và email bằng Postmanscript
 
-Truyền request bỏ trống email 
+- Truyền request bỏ trống email 
 
-"pm.test(""response have field empty email"", function(){
+pm.test(""response have field empty email"", function(){
     pm.expect(pm.response.json().errors[0].message).to.eq(""is invalid email format"")
-})"
+})
 
-truyền request thiếu trường email/last_name/first_name
+- Truyền request thiếu trường email/last_name/first_name
 
 pm.test("response have miss field email/first name/last name", function(){
     pm.expect(pm.response.json().errors[0].message).to.eq("Customer must have a first name, phone number or email address");
@@ -67,8 +67,8 @@ pm.test("response have miss field email/first name/last name", function(){
 
 ### Tạo mới KH với họ, tên, email ngẫu nhiên
 
-Method : POST 
-URL:{{baseUrl}}/admin/customers.json
+- Method : POST 
+- URL:{{baseUrl}}/admin/customers.json
 Resquest body: 
 
 {
