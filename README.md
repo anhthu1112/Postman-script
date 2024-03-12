@@ -55,15 +55,19 @@ Ví dụ: Trong file excel đính kèm
 
 - Truyền request bỏ trống email 
 
-pm.test(""response have field empty email"", function(){
-    pm.expect(pm.response.json().errors[0].message).to.eq(""is invalid email format"")
+```js
+pm.test("response have field empty email", function(){
+    pm.expect(pm.response.json().errors[0].message).to.eq("is invalid email format")
 })
+```
 
 - Truyền request thiếu trường email/last_name/first_name
 
+```js
 pm.test("response have miss field email/first name/last name", function(){
     pm.expect(pm.response.json().errors[0].message).to.eq("Customer must have a first name, phone number or email address");
 });
+```
 
 ### Tạo mới KH với họ, tên, email ngẫu nhiên
 
@@ -71,6 +75,7 @@ pm.test("response have miss field email/first name/last name", function(){
 - URL:{{baseUrl}}/admin/customers.json
 Resquest body: 
 
+```json
 {
   "customer": {
     "first_name": "{{$randomFirstName}}",
@@ -90,17 +95,22 @@ Resquest body:
     ]
   }
 }
+```
 
 ### Kiểm tra status trả về 200 thành công khi truyền thông tin hợp lệ
 
+```js
 pm.test("status code 200", function(){
     pm.expect(pm.response.code).to.eq(200);
 });
+```
 ### Kiểm tra response body trả về là Json
 
+```js
 pm.test("response is an object", function(){
     pm.expect(pm.response.json()).to.be.an("object");
 });
+```
 
 ### Kiểm tra kiểu dữ liệu của id là number, email là string, first_name là string, last_name là string trong response body
 
@@ -108,16 +118,21 @@ có 2 cách kiểm tra
 
 Cách 1: Kiểm tra từng trường 
 
+```js
 pm.test("response have field which is number", function(){
     pm.expect(pm.response.json().customer.id).to.be.a("number");
 });
+```
 
+```js
 pm.test("response have field email which is string", function(){
     pm.expect(pm.response.json().customer.email).to.be.a("string");
 });
+```
 
 cách 2: Kiểm tra schema
 
+```js
 pm.test("response have JSON scheme", function(){
     var schema = {
         type: "object",
@@ -140,10 +155,16 @@ pm.test("response have JSON scheme", function(){
     pm.expect(pm.response.json()).to.have.jsonSchema(schema);
 
 });
+
+```
+
 ### Tìm cách kiểm tra emai trong kết quả giống với email khi gửi lên (khó, có thể để sau)
 
+```js
 pm.test("response have the same email", function(){
     pm.expect(pm.response.json().customer.email).to.equal("Alexyssssss@example.com");
 });
+
+```
 
 ## 3. Học 1 bài khoá CoderX"
