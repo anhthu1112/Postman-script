@@ -168,11 +168,45 @@ pm.test("response have JSON scheme", function(){
 
 ### Tìm cách kiểm tra emai trong kết quả giống với email khi gửi lên (khó, có thể để sau)
 
+* request body 
 ```js
-pm.test("response have the same email", function(){
-    pm.expect(pm.response.json().customer.email).to.equal("Alexyssssss@example.com");
+
+{
+  "customer": {
+    "first_name": "An",
+    "last_name": "{{$randomLastName}}",
+    "email": "{{EMAIL}}",
+    "verified_email": true,
+    "addresses": [
+      {
+        "address1": "123 Oak St",
+        "city": "Ottawa",
+        "province": "ON",
+        "zip": "123 ABC",
+        "last_name": "Lastnameson",
+        "first_name": "Mother",
+        "country": "CA"
+      }
+    ]
+  }
+}
 });
 
+```
+
+* pre request script 
+
+```js
+pm.variables.set("EMAIL", pm.variables.replaceIn("{{$randomEmail}}"))
+```
+
+* Tests 
+
+```js 
+pm.test("response have the same email as request", function (){
+    var email = pm.variables.get("EMAIL");
+    pm.expect(pm.response.json().customer.email).to.eq(email);
+});
 ```
 
 ## 3. Học 1 bài khoá CoderX"
